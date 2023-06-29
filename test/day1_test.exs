@@ -8,12 +8,22 @@ defmodule Day1Test do
   end
 
   test "calculates the correct calories" do
-    assert Day1.max_calories(
-      [1000, 2000, 3000, nil,
-       4000, nil,
-       5000, 6000, nil,
-       7000, 8000, 9000, nil,
-       10000]) == 24000
+    assert Day1.max_calories([
+             1000,
+             2000,
+             3000,
+             nil,
+             4000,
+             nil,
+             5000,
+             6000,
+             nil,
+             7000,
+             8000,
+             9000,
+             nil,
+             10000
+           ]) == 24000
   end
 
   test "loads from file as list", state do
