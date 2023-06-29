@@ -43,7 +43,7 @@ defmodule Day2Test do
     assert Day2.score_rock_paper_scissor(state[:test_data]) == 12458
   end
 
-  test "plays using input but expected outcome", state do
+  test "plays using input but expected outcome" do
     assert Day2.play_rock_paper_scissor_with_expected_outcome("A", "Y") == 4
   end
 
