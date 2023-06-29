@@ -3,7 +3,7 @@ defmodule Day4 do
   Camp Cleanup
   """
 
-  def covers?(tgt, dest) do
+  def schedule_to_ranges(tgt, dest) do
     ab = String.split(tgt, "-")
     cd = String.split(dest, "-")
 
@@ -16,10 +16,16 @@ defmodule Day4 do
         end
       end)
 
+    [a..b, c..d]
+  end
+
+  def covers?(tgt, dest) do
+    [tgt, dest] = schedule_to_ranges(tgt, dest)
+
     [i, j] =
-      case Enum.count(a..b) > Enum.count(c..d) do
-        true -> [a..b, c..d]
-        false -> [c..d, a..b]
+      case Enum.count(tgt) > Enum.count(dest) do
+        true -> [tgt, dest]
+        false -> [dest, tgt]
       end
 
     j
@@ -28,18 +34,7 @@ defmodule Day4 do
   end
 
   def any_overlap?(tgt, dest) do
-    ab = String.split(tgt, "-")
-    cd = String.split(dest, "-")
-
-    [a, b, c, d] =
-      (ab ++ cd)
-      |> Enum.map(fn x ->
-        case Integer.parse(x) do
-          {x, _decima} -> x
-          _ -> nil
-        end
-      end)
-
-    not Range.disjoint?(a..b, c..d)
+    [a, b] = schedule_to_ranges(tgt, dest)
+    not Range.disjoint?(a, b)
   end
 end
