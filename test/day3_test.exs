@@ -63,4 +63,29 @@ defmodule Day3Test do
 
     assert total == 7568
   end
+
+  test "finding common component between sacks" do
+    cases = [
+      {["vJrwpWtwJgWrhcsFMMfFFhFp", "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL", "PmmdzqPrVvPwwTWBwg"],
+       "r"},
+      {["wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn", "ttgJtRGJQctTZtZT", "CrZsJsPPZsGzwwsLwLmpwMDw"]},
+      "Z"
+    ]
+
+    for {data, outcome} <- cases do
+      assert Day3.common_sack_contents(data) == outcome
+    end
+  end
+
+  test "finding priorty of common components", state do
+    priority_sum =
+      state[:test_data]
+      |> Enum.map(&Enum.at(&1, 0))
+      |> Enum.chunk_every(3)
+      |> Enum.map(&Day3.common_sack_contents/1)
+      |> Enum.map(&Day3.component_value/1)
+      |> Enum.sum()
+
+    assert priority_sum == 2780
+  end
 end

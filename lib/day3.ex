@@ -21,4 +21,15 @@ defmodule Day3 do
       String.match?(item, ~r/[A-Z]/) -> Enum.at(to_charlist(item), 0) - 38
     end
   end
+
+  def common_sack_contents(sacks) do
+    [c1, c2, c3] = sacks
+
+    c1
+    |> String.split("", trim: true)
+    |> Enum.find(fn v ->
+      String.contains?(c3, [v]) and
+        String.contains?(c2, [v])
+    end)
+  end
 end
